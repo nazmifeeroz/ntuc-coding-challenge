@@ -1,7 +1,7 @@
 import React from 'react'
 import { createGlobalStyle } from 'styled-components'
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, ...pageProps }) => {
   return (
     <>
       <GlobalStyles />
