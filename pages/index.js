@@ -5,35 +5,12 @@ import CouponsTable from '_components/CouponsTable'
 import useCouponsTable from '_hooks/useCouponsTable'
 
 const IndexPage = (props) => {
-  const {
-    data: coupons,
-    canNextPage,
-    canPrevPage,
-    gotoPage,
-    nextPage,
-    currentPage,
-    prevPage,
-    showingEndAt,
-    showingStartAt,
-    totalCounts,
-    totalPages,
-  } = useCouponsTable(props)
+  const [state, dispatch] = useCouponsTable(props)
 
   return (
     <Container>
-      <CouponsTable coupons={coupons} />
-      <Pager
-        canNextPage={canNextPage}
-        canPrevPage={canPrevPage}
-        currentPage={currentPage}
-        gotoPage={gotoPage}
-        nextPage={nextPage}
-        prevPage={prevPage}
-        showingEndAt={showingEndAt}
-        showingStartAt={showingStartAt}
-        totalCounts={totalCounts}
-        totalPages={totalPages}
-      />
+      <CouponsTable coupons={state.data} />
+      <Pager state={state} dispatch={dispatch} />
     </Container>
   )
 }

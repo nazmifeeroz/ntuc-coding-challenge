@@ -27,19 +27,32 @@ const useCouponsTable = ({ pageProps: { coupons, totalCounts } }) => {
   const canNextPage = currentPage !== totalPages
   const canPrevPage = currentPage !== 1
 
-  return {
-    canNextPage,
-    canPrevPage,
-    data: sanitizedCoupons,
-    gotoPage: setPage,
-    nextPage: () => canNextPage && setPage(currentPage + 1),
-    currentPage,
-    prevPage: () => canPrevPage && setPage(currentPage - 1),
-    showingEndAt,
-    showingStartAt,
-    totalCounts,
-    totalPages,
+  const dispatchReducer = (action, payload = null) => {
+    switch (action) {
+      case 'NEXT_PAGE':
+        return () => canNextPage && setPage(currentPage + 1)
+      case 'PREV_PAGE':
+        return () => canPrevPage && setPage(currentPage - 1)
+      case 'GOTO_PAGE':
+        return setPage(payload.page)
+      default:
+        return action
+    }
   }
+
+  return [
+    {
+      canNextPage,
+      canPrevPage,
+      currentPage,
+      data: sanitizedCoupons,
+      showingEndAt,
+      showingStartAt,
+      totalCounts,
+      totalPages,
+    },
+    dispatchReducer,
+  ]
 }
 
 export default useCouponsTable

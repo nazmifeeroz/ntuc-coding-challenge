@@ -1,62 +1,44 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-const PaginationNumbers = ({
-  canNextPage,
-  canPrevPage,
-  gotoPage,
-  nextPage,
-  currentPage,
-  prevPage,
-  totalPages,
-}) => (
-  <PageNumberWrapper>
-    <PaginateButton disabled={!canPrevPage} onClick={prevPage}>
-      &larr;{' '}
-    </PaginateButton>
-    {[...Array(totalPages)].map((_e, i) => {
-      return (
-        <StyledPageNumber
-          onClick={() => gotoPage(i + 1)}
-          active={currentPage === i + 1}
-          key={i}
-        >
-          {i + 1}
-        </StyledPageNumber>
-      )
-    })}{' '}
-    <PaginateButton disabled={!canNextPage} onClick={nextPage}>
-      &rarr;
-    </PaginateButton>
-  </PageNumberWrapper>
-)
+const PaginationNumbers = ({ state, dispatch }) => {
+  return (
+    <PageNumberWrapper>
+      <PaginateButton
+        disabled={!state.canPrevPage}
+        onClick={dispatch('PREV_PAGE')}
+      >
+        &larr;{' '}
+      </PaginateButton>
+      {[...Array(state.totalPages)].map((_e, i) => {
+        return (
+          <StyledPageNumber
+            onClick={() => dispatch('GOTO_PAGE', { page: i + 1 })}
+            active={state.currentPage === i + 1}
+            key={i}
+          >
+            {i + 1}
+          </StyledPageNumber>
+        )
+      })}
+      <PaginateButton
+        disabled={!state.canNextPage}
+        onClick={dispatch('NEXT_PAGE')}
+      >
+        &rarr;
+      </PaginateButton>
+    </PageNumberWrapper>
+  )
+}
 
-const Pager = ({
-  canNextPage,
-  canPrevPage,
-  currentPage,
-  gotoPage,
-  nextPage,
-  prevPage,
-  showingEndAt,
-  showingStartAt,
-  totalCounts,
-  totalPages,
-}) => {
+const Pager = ({ state, dispatch }) => {
   return (
     <PagerWrapper>
       <PageDisplay>
-        Showing {showingStartAt + 1} - {showingEndAt} of {totalCounts}
+        Showing {state.showingStartAt + 1} - {state.showingEndAt} of{' '}
+        {state.totalCounts}
       </PageDisplay>
-      <PaginationNumbers
-        totalPages={totalPages}
-        currentPage={currentPage}
-        gotoPage={gotoPage}
-        nextPage={nextPage}
-        prevPage={prevPage}
-        canNextPage={canNextPage}
-        canPrevPage={canPrevPage}
-      />
+      <PaginationNumbers state={state} dispatch={dispatch} />
     </PagerWrapper>
   )
 }
@@ -72,7 +54,6 @@ const PageNumberWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 10px 30px;
 `
 
 const PaginateButton = styled.a`

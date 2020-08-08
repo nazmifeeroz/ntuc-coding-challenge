@@ -48,9 +48,8 @@ const CouponsTable = ({ coupons }) => {
 }
 
 const StyledTable = styled.table`
-  width: 100vw;
+  width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
 
   th {
     text-align: left;
