@@ -11,7 +11,7 @@ const IndexPage = (props) => {
 
   return (
     <>
-      <CouponsTable coupons={state.data} />
+      <CouponsTable state={state} dispatch={dispatch} />
       <Pager state={state} dispatch={dispatch} />
     </>
   )

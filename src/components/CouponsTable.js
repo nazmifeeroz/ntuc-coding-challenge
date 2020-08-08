@@ -3,15 +3,19 @@ import styled from 'styled-components'
 import dayjs from 'dayjs'
 import advancedFormat from 'dayjs/plugin/advancedFormat'
 import Ellipsis from '_components/ellipsis'
+import ArrowDown from '_components/ArrowDown'
 
 dayjs.extend(advancedFormat)
 
-const CouponsTable = ({ coupons }) => {
+const CouponsTable = ({ state: { data: coupons, isSorted }, dispatch }) => {
   return (
     <StyledTable>
       <thead>
         <tr>
-          <th>Coupon</th>
+          <ClickableTh onClick={dispatch('SORT_BY', { sortBy: 'couponCode' })}>
+            Coupon
+            {isSorted && <ArrowDown />}
+          </ClickableTh>
           <th>Discount</th>
           <th>Limit</th>
           <th>Validity</th>
@@ -75,6 +79,10 @@ const StyledTable = styled.table`
   tr:nth-child(odd) {
     background-color: #fbfcfc;
   }
+`
+
+const ClickableTh = styled.th`
+  cursor: pointer;
 `
 
 export default CouponsTable

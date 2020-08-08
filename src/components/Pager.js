@@ -13,7 +13,7 @@ const PaginationNumbers = ({ state, dispatch }) => {
       {[...Array(state.totalPages)].map((_e, i) => {
         return (
           <StyledPageNumber
-            onClick={() => dispatch('GOTO_PAGE', { page: i + 1 })}
+            onClick={dispatch('GOTO_PAGE', { page: i + 1 })}
             active={state.currentPage === i + 1}
             key={i}
           >
