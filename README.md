@@ -31,7 +31,7 @@ Open http://localhost:3000/ to view it in browser.
 
 ## Docker
 
-Start the Docker app.
+Start the Docker application.
 
 Build a docker image:
 
