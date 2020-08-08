@@ -10,11 +10,9 @@ module.exports = {
       'module-resolver',
       {
         alias: {
-          _assets: './src/assets',
           _components: './src/components',
-          _constants: './src/constants',
+          _hooks: './src/hooks',
           _pages: './pages',
-          _store: './src/store',
         },
       },
     ],
