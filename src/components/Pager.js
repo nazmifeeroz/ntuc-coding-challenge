@@ -54,6 +54,7 @@ const PageNumberWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-right: 20px;
 `
 
 const PaginateButton = styled.a`
@@ -84,7 +85,7 @@ const StyledPageNumber = styled(PaginateButton)`
 `
 
 const PageDisplay = styled.div`
-  margin: 10px 30px;
+  margin: 10px 10px;
   color: #a4b3b8;
 `
 

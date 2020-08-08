@@ -7,11 +7,13 @@ import useCouponsTable from '_hooks/useCouponsTable'
 const IndexPage = (props) => {
   const [state, dispatch] = useCouponsTable(props)
 
+  if (state.error) return <Container>{state.error}</Container>
+
   return (
-    <Container>
+    <>
       <CouponsTable coupons={state.data} />
       <Pager state={state} dispatch={dispatch} />
-    </Container>
+    </>
   )
 }
 
@@ -39,7 +41,7 @@ export const getServerSideProps = async () => {
 }
 
 const Container = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;

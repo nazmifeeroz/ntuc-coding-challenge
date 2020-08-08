@@ -2,7 +2,9 @@ import { useState } from 'react'
 
 const COUPONS_PER_PAGE = 20
 
-const useCouponsTable = ({ pageProps: { coupons, totalCounts } }) => {
+const useCouponsTable = ({ pageProps: { coupons, totalCounts, error } }) => {
+  if (error) return [{ error }]
+
   const [currentPage, setPage] = useState(1)
 
   const showingStartAt =
